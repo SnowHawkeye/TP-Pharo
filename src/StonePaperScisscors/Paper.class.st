@@ -1,6 +1,6 @@
 Class {
 	#name : #Paper,
-	#superclass : #Object,
+	#superclass : #SPSTool,
 	#category : #StonePaperScisscors
 }
 
