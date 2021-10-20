@@ -19,6 +19,20 @@ self assert: anAnd state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testAndFalseEvaluate [
+|anAnd anInterrupteur1 anInterrupteur2|
+
+anAnd := And new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anAnd setIn1: anInterrupteur1 .
+anAnd setIn2: anInterrupteur2 .
+
+self assert: anAnd evaluate class equals: SignalBas.
+]
+
+{ #category : #tests }
 ComposantTest >> testAndFalseTrue [
 |anAnd anInterrupteur1 anInterrupteur2|
 
@@ -33,6 +47,23 @@ anInterrupteur1 on.
 anInterrupteur2 off.
 
 self assert: anAnd state equals: false.
+]
+
+{ #category : #tests }
+ComposantTest >> testAndFalseTrueEvaluate [
+|anAnd anInterrupteur1 anInterrupteur2|
+
+anAnd := And new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anAnd setIn1: anInterrupteur1 .
+anAnd setIn2: anInterrupteur2 .
+
+anInterrupteur1 on.
+anInterrupteur2 off.
+
+self assert: anAnd evaluate class equals: SignalBas.
 ]
 
 { #category : #tests }
@@ -53,6 +84,23 @@ self assert: anAnd state equals: true.
 ]
 
 { #category : #tests }
+ComposantTest >> testAndTrueEvaluate [
+|anAnd anInterrupteur1 anInterrupteur2|
+
+anAnd := And new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anAnd setIn1: anInterrupteur1 .
+anAnd setIn2: anInterrupteur2 .
+
+anInterrupteur1 on.
+anInterrupteur2 on.
+
+self assert: anAnd evaluate class equals: SignalHaut.
+]
+
+{ #category : #tests }
 ComposantTest >> testAndTrueFalse [
 |anAnd anInterrupteur1 anInterrupteur2|
 
@@ -67,6 +115,23 @@ anInterrupteur1 off.
 anInterrupteur2 on.
 
 self assert: anAnd state equals: false.
+]
+
+{ #category : #tests }
+ComposantTest >> testAndTrueFalseEvaluate [
+|anAnd anInterrupteur1 anInterrupteur2|
+
+anAnd := And new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anAnd setIn1: anInterrupteur1 .
+anAnd setIn2: anInterrupteur2 .
+
+anInterrupteur1 off.
+anInterrupteur2 on.
+
+self assert: anAnd evaluate class equals: SignalBas.
 ]
 
 { #category : #tests }
@@ -183,6 +248,15 @@ self assert: anInterrupteur state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testInterrupteurInitEvaluate [
+|anInterrupteur|
+
+anInterrupteur := Interrupteur new.
+
+self assert: anInterrupteur evaluate class equals: SignalBas.
+]
+
+{ #category : #tests }
 ComposantTest >> testInterrupteurOff [
 |anInterrupteur|
 
@@ -193,7 +267,27 @@ self assert: anInterrupteur state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testInterrupteurOffEvaluate [
+|anInterrupteur|
+
+anInterrupteur := Interrupteur new.
+anInterrupteur off.
+
+self assert: anInterrupteur evaluate class equals: SignalBas.
+]
+
+{ #category : #tests }
 ComposantTest >> testInterrupteurOn [
+|anInterrupteur|
+
+anInterrupteur := Interrupteur new.
+anInterrupteur on.
+
+self assert: anInterrupteur state.
+]
+
+{ #category : #tests }
+ComposantTest >> testInterrupteurOnEvaluate [
 |anInterrupteur|
 
 anInterrupteur := Interrupteur new.
@@ -215,6 +309,18 @@ self assert: aNot state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testNotEvaluate [
+|aNot anInterrupteur|
+
+aNot := Not new.
+anInterrupteur := Interrupteur new.
+anInterrupteur on.
+aNot setIn: anInterrupteur .
+
+self assert: aNot evaluate class equals: SignalBas.
+]
+
+{ #category : #tests }
 ComposantTest >> testNotTrue [
 |aNot anInterrupteur|
 
@@ -224,6 +330,18 @@ anInterrupteur off.
 aNot setIn: anInterrupteur .
 
 self assert: aNot state equals: true.
+]
+
+{ #category : #tests }
+ComposantTest >> testNotTrueEvaluate [
+|aNot anInterrupteur|
+
+aNot := Not new.
+anInterrupteur := Interrupteur new.
+anInterrupteur off.
+aNot setIn: anInterrupteur .
+
+self assert: aNot evaluate class equals: SignalHaut.
 ]
 
 { #category : #tests }
@@ -241,6 +359,20 @@ self assert: anOr state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testOrFalseEvaluate [
+|anOr anInterrupteur1 anInterrupteur2|
+
+anOr := Or new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anOr setIn1: anInterrupteur1 .
+anOr setIn2: anInterrupteur2 .
+
+self assert: anOr evaluate class equals: SignalBas.
+]
+
+{ #category : #tests }
 ComposantTest >> testOrFalseTrue [
 |anOr anInterrupteur1 anInterrupteur2|
 
@@ -254,6 +386,22 @@ anOr setIn2: anInterrupteur2 .
 anInterrupteur2 on.
 
 self assert: anOr state equals: true.
+]
+
+{ #category : #tests }
+ComposantTest >> testOrFalseTrueEvaluate [
+|anOr anInterrupteur1 anInterrupteur2|
+
+anOr := Or new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anOr setIn1: anInterrupteur1 .
+anOr setIn2: anInterrupteur2 .
+
+anInterrupteur2 on.
+
+self assert: anOr evaluate class equals: SignalHaut.
 ]
 
 { #category : #tests }
@@ -274,6 +422,23 @@ self assert: anOr state equals: true.
 ]
 
 { #category : #tests }
+ComposantTest >> testOrTrueEvaluate [
+|anOr anInterrupteur1 anInterrupteur2|
+
+anOr := Or new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anOr setIn1: anInterrupteur1 .
+anOr setIn2: anInterrupteur2 .
+
+anInterrupteur1 on.
+anInterrupteur2 on.
+
+self assert: anOr evaluate class equals: SignalHaut.
+]
+
+{ #category : #tests }
 ComposantTest >> testOrTrueFalse [
 |anOr anInterrupteur1 anInterrupteur2|
 
@@ -287,6 +452,22 @@ anOr setIn2: anInterrupteur2 .
 anInterrupteur1 on.
 
 self assert: anOr state equals: true.
+]
+
+{ #category : #tests }
+ComposantTest >> testOrTrueFalseEvaluate [
+|anOr anInterrupteur1 anInterrupteur2|
+
+anOr := Or new.
+anInterrupteur1 := Interrupteur new.
+anInterrupteur2 := Interrupteur new.
+
+anOr setIn1: anInterrupteur1 .
+anOr setIn2: anInterrupteur2 .
+
+anInterrupteur1 on.
+
+self assert: anOr evaluate class equals: SignalHaut.
 ]
 
 { #category : #tests }
@@ -313,6 +494,33 @@ anAnd setIn2: aNot .
 aVanne setIn: anAnd.
 
 self assert: aVanne state equals: false.
+
+]
+
+{ #category : #tests }
+ComposantTest >> testStateCircuitExampleOffOffEvaluate [
+
+|i1 i2 iSecurite anOr aNot anAnd aVanne|
+
+i1 := Interrupteur new.
+i2 := Interrupteur new.
+iSecurite := Interrupteur new.
+anOr := Or new.
+aNot := Not new.
+anAnd := And new.
+aVanne := Vanne new.
+
+i1 off.
+i2 off.
+iSecurite on.
+
+anOr setIn1: i1; setIn2: i2.
+aNot setIn: iSecurite.
+anAnd setIn1: anOr .
+anAnd setIn2: aNot .
+aVanne setIn: anAnd.
+
+self assert: aVanne evaluate class equals: SignalBas.
 
 ]
 
@@ -344,6 +552,33 @@ self assert: aVanne state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testStateCircuitExampleOnOffEvaluate [
+
+|i1 i2 iSecurite anOr aNot anAnd aVanne|
+
+i1 := Interrupteur new.
+i2 := Interrupteur new.
+iSecurite := Interrupteur new.
+anOr := Or new.
+aNot := Not new.
+anAnd := And new.
+aVanne := Vanne new.
+
+i1 on.
+i2 off.
+iSecurite on.
+
+anOr setIn1: i1; setIn2: i2.
+aNot setIn: iSecurite.
+anAnd setIn1: anOr .
+anAnd setIn2: aNot .
+aVanne setIn: anAnd.
+
+self assert: aVanne evaluate class equals: SignalBas.
+
+]
+
+{ #category : #tests }
 ComposantTest >> testStateCircuitExampleOnOn [
 
 |i1 i2 iSecurite anOr aNot anAnd aVanne|
@@ -371,6 +606,33 @@ self assert: aVanne state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testStateCircuitExampleOnOnEvaluate [
+
+|i1 i2 iSecurite anOr aNot anAnd aVanne|
+
+i1 := Interrupteur new.
+i2 := Interrupteur new.
+iSecurite := Interrupteur new.
+anOr := Or new.
+aNot := Not new.
+anAnd := And new.
+aVanne := Vanne new.
+
+i1 on.
+i2 on.
+iSecurite on.
+
+anOr setIn1: i1; setIn2: i2.
+aNot setIn: iSecurite.
+anAnd setIn1: anOr .
+anAnd setIn2: aNot .
+aVanne setIn: anAnd.
+
+self assert: aVanne evaluate class equals: SignalBas.
+
+]
+
+{ #category : #tests }
 ComposantTest >> testVanneFalse [
 |aVanne anInterrupteur|
 
@@ -384,6 +646,19 @@ self assert: aVanne state equals: false.
 ]
 
 { #category : #tests }
+ComposantTest >> testVanneFalseEvaluate [
+|aVanne anInterrupteur|
+
+anInterrupteur := Interrupteur new.
+aVanne := Vanne new.
+
+aVanne setIn: anInterrupteur.
+anInterrupteur off.
+
+self assert: aVanne evaluate class equals: SignalBas.
+]
+
+{ #category : #tests }
 ComposantTest >> testVanneTrue [
 |aVanne anInterrupteur|
 
@@ -394,4 +669,17 @@ aVanne setIn: anInterrupteur.
 anInterrupteur on.
 
 self assert: aVanne state equals: true.
+]
+
+{ #category : #tests }
+ComposantTest >> testVanneTrueEvaluate [
+|aVanne anInterrupteur|
+
+anInterrupteur := Interrupteur new.
+aVanne := Vanne new.
+
+aVanne setIn: anInterrupteur.
+anInterrupteur on.
+
+self assert: aVanne evaluate class equals: SignalHaut.
 ]

@@ -15,9 +15,11 @@ Circuit class >> buildFromComposants: aComposantCollection [
 	circuit := self new.
 	sortById := [ :c1 :c2| (c1 id) < (c2 id) ].
 	
-	(circuit composants) addAll: aComposantCollection ; sort: sortById.
-	(circuit interrupteurs) addAll: (circuit composants select: [ :each | each class == Interrupteur ]); sort: sortById.
-	(circuit sorties) addAll: (circuit composants select: [ :each | each class == Vanne ]); sort: sortById.
+	aComposantCollection do: [ :each | each addToCircuit: circuit ].
+	circuit composants sort: sortById.
+	circuit interrupteurs sort: sortById.
+	circuit sorties sort: sortById.
+	
 	^ circuit.
 ]
 

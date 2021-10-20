@@ -14,6 +14,11 @@ Not >> description [
 	^ 'Not (', self id printString, ') in: ', outputIn.
 ]
 
+{ #category : #'public access' }
+Not >> evaluate [
+	^ in evaluate not.
+]
+
 { #category : #'input/output' }
 Not >> setIn: aComposant [
 	in := aComposant.

@@ -14,6 +14,11 @@ Or >> description [
 	^ 'Or (', self id printString, ') in1: ', outputIn1 , ' in2: ', outputIn2 .
 ]
 
+{ #category : #'public access' }
+Or >> evaluate [
+	^ (in1 evaluate) or: (in2 evaluate).
+]
+
 { #category : #accessing }
 Or >> state [
 ^ in1 state or: in2 state
